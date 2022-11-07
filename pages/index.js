@@ -3,7 +3,7 @@ import Card from '../comps/card';
 import axios from 'axios';
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const gameweekDate = [
     [1,5,8,2022],
     [2,13,8,2022],
