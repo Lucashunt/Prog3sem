@@ -24,6 +24,9 @@ import wolves from "../public/wolves.png";
 import nottforrest from "../public/nottforrest.png";
 
 export default function Card({ gameweek }) {
+  gameweek.sort((a, b) => new Date(a.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) - new Date(b.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }))
+  
+  console.log(gameweek)
   return Array.isArray(gameweek)
     ? gameweek.map((game) => (
         <CardGameweek
@@ -32,7 +35,7 @@ export default function Card({ gameweek }) {
           awayteam={game.awayteam}
           hometeamGoals={game.hometeamGoals}
           awayteamGoals={game.awayteamGoals}
-          time={new Date(game.time).toLocaleDateString()}
+          time={new Date(game.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           gameweek={game.gameweek}
         />
       ))

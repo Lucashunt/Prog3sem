@@ -13,8 +13,7 @@ export default function Index() {
   if (error) return <div>Failed to load</div>
   if (!data) return <div>Loading...</div>
 
-console.log('data', data)
-console.log('error', error)
+
   
     
      return (
