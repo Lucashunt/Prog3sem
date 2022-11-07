@@ -51,7 +51,15 @@ const CardGameweek = ({
   const [goalshome, setGoalshome] = useState(null);
   const [goalsaway, setGoalsaway] = useState(null);
 
+  async function apiCall(gameID) {
+    const res = await fetch(
+      `api/match/?gameID=${gameID.gameID}&gameweek=${gameweek}`
+    );
+    const data = await res.json();
 
+    setGoalshome(<GoalsAway match={data.match} />);
+    setGoalsaway(<GoalsHome match={data.match} />);
+  }
 
 
   const teamsAway = {
