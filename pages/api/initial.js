@@ -28,21 +28,21 @@ const gameweekDate = [
    let today = new Date().toLocaleDateString('de-DE', options).toString().replace(/\./g, ',').split(',').map(Number)
    today.unshift(0)
  
-//   let gameweeksBefore = []
-//   for(let i = 0; i < gameweekDate.length; i++){
-//     if (parseInt(gameweekDate[i].slice(3,4)) === parseInt(today.slice(3,4)) && parseInt(gameweekDate[i].slice(2,3)) === parseInt(today.slice(2,3)) && parseInt(gameweekDate[i].slice(1,2)) <= parseInt(today.slice(1,2))){
-//       gameweeksBefore.push(gameweekDate[i])
-//     }   
-//     }
+  let gameweeksBefore = []
+  for(let i = 0; i < gameweekDate.length; i++){
+    if (parseInt(gameweekDate[i].slice(3,4)) === parseInt(today.slice(3,4)) && parseInt(gameweekDate[i].slice(2,3)) === parseInt(today.slice(2,3)) && parseInt(gameweekDate[i].slice(1,2)) <= parseInt(today.slice(1,2))){
+      gameweeksBefore.push(gameweekDate[i])
+    }   
+    }
     
-//     const gameweek = parseInt(gameweeksBefore[0].slice(0,1))
+    const gameweek = parseInt(gameweeksBefore[0].slice(0,1))
     
     
-    const response = await axios.get(`https://fantasy.premierleague.com/api/fixtures/?event=15`);
+    const response = await axios.get(`https://fantasy.premierleague.com/api/fixtures/?event=${gameweek}`);
     const data = response.data;
 
     const games = data.map((game) => {
-        return {'gameID': game.id, 'hometeam':  game.team_h, 'awayteam': game.team_a, 'hometeamGoals': game.team_h_score, 'awayteamGoals': game.team_a_score, 'time': game.kickoff_time, 'gameweek': 15}
+        return {'gameID': game.id, 'hometeam':  game.team_h, 'awayteam': game.team_a, 'hometeamGoals': game.team_h_score, 'awayteamGoals': game.team_a_score, 'time': game.kickoff_time, 'gameweek': gameweek}
     })
 
 
