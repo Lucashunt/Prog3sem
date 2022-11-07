@@ -23,9 +23,9 @@ const gameweekDate = [
     [19,2,1,2023],
     [20,14,1,2023],
   ]
-
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric'}
   
-   const today = new Date().toLocaleDateString().toString().replace(/\./g, ',').split(',').map(Number)
+   let today = new Date().toLocaleDateString('de-DE', options).toString().replace(/\./g, ',').split(',').map(Number)
    today.unshift(0)
  
 //   let gameweeksBefore = []
