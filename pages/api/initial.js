@@ -24,20 +24,10 @@ const gameweekDate = [
     [20,14,1,2023],
   ]
 
-  
-  const today = new Date().toLocaleDateString().toString().replace(/\./g, ',').split(',').map(Number)
-  today.unshift(0)
- 
-  let gameweeksBefore = []
-  for(let i = 0; i < gameweekDate.length; i++){
-    if (parseInt(gameweekDate[i].slice(3,4)) === parseInt(today.slice(3,4)) && parseInt(gameweekDate[i].slice(2,3)) === parseInt(today.slice(2,3)) && parseInt(gameweekDate[i].slice(1,2)) <= parseInt(today.slice(1,2))){
-      gameweeksBefore.push(gameweekDate[i])
-    }   
-    }
-    const gameweek = parseInt(gameweeksBefore.pop().slice(0,1))
+
         
     
-    const response = await axios.get(`https://fantasy.premierleague.com/api/fixtures/?event=${gameweek}`);
+    const response = await axios.get(`https://fantasy.premierleague.com/api/fixtures/?event=15`);
     const data = response.data;
 
     const games = data.map((game) => {
