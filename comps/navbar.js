@@ -12,6 +12,9 @@ export default function Example() {
 
   const navigation = [
     { name: '', href: '', current: false },
+    { name: 'Forside', href: '/', current: false },
+    { name: 'Tabel', href: '/table', current: false },
+    { name: 'Favorithold', href: '/team/18', current: false },
 
     
   ]
@@ -30,7 +33,7 @@ export default function Example() {
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 text-white rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 text-white rounded-md hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block w-6 h-6" aria-hidden="true" />
@@ -39,13 +42,13 @@ export default function Example() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+              <div className="flex items-center justify-center flex-1 sm:items-center sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
                   <Link href="/">
                     <a>
                     <img
-                  className="block w-auto h-8 lg:hidden"
-                  src="/logo.png"
+                  className="block w-auto h-10 "
+                  src="/logo-no-background.png"
                   alt="Your Company"
                 />
                   </a>
@@ -63,8 +66,8 @@ export default function Example() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? ' text-white hover:bg-gray-400': 'text-white hover:bg-gray-400 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.current ? ' text-white hover:bg-blue-400': 'text-white hover:bg-blue-400/20 hover:text-white',
+                          'px-3 py-2 rounded-md text-lg font-extralight '
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >

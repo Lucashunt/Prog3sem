@@ -315,7 +315,7 @@ const CardGameweek = ({
     <>
       <button>
         <div
-          className="bg-blue-500  text-white text-3xl  hover:bg-blue-500/80"
+          className="bg-blue-500  text-white 2xl:text-2xl  hover:bg-blue-500/80 rounded-md lg:text-lg flex flex-col h-full"
           onClick={() => apiCall({ gameID, gameweek })}
         >
           <div className="p-10">

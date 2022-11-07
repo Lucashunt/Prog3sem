@@ -18,7 +18,7 @@ export default function Index() {
     
      return (
    <main>
-       <div className='m-20'>
+       <div className='mx-20'>
         {/* <button className='px-8 py-4 bg-green-400 rounded-2xl text-white font-bold hover:bg-green-400/80' onClick={() => apiCall(1)}><a>GW 1</a></button>
         <button className='px-8 py-4 bg-green-400 rounded-2xl text-white font-bold hover:bg-green-400/80 ml-2' onClick={() => apiCall(2)}><a>GW 2</a></button>
         <button className='px-8 py-4 bg-green-400 rounded-2xl text-white font-bold hover:bg-green-400/80 ml-2' onClick={() => apiCall(3)}><a>GW 3</a></button>
@@ -28,8 +28,8 @@ export default function Index() {
         <button className='px-8 py-4 bg-green-400 rounded-2xl text-white font-bold hover:bg-green-400/80 ml-2' onClick={() => apiCall(8)}><a>GW 8</a></button>
         <button className='px-8 py-4 bg-green-400 rounded-2xl text-white font-bold hover:bg-green-400/80 ml-2' onClick={() => apiCall(9)}><a>GW 9</a></button>
         <button className='px-8 py-4 bg-green-400 rounded-2xl text-white font-bold hover:bg-green-400/80 ml-2' onClick={() => apiCall(10)}><a>GW 10</a></button> */}
-
-      <div className='grid gap-2 mt-20'>
+      <div className='text-center mb-5 mt-10 text-5xl font-bold text-white bg-blue-500 rounded-lg p-10 tracking-wider'>GAMEWEEK <b className='text-orange-400 font-extrabold text-7xl'>{data.games[0].gameweek}</b> </div>
+      <div className='grid gap-5 sm:grid-cols-2'>
       <Card gameweek={data.games} className=""/>
       </div>
    </div>
