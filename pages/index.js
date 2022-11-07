@@ -2,28 +2,16 @@ import { useState, useEffect } from 'react'
 import Card from '../comps/card';
 
 
+import useSWR from 'swr'
 
-
-
-
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Index() {
 
-    const [data, setData] = useState(null)
-    const [isLoading, setLoading] = useState(false)
-  
-    useEffect(() => {
-      setLoading(true)
-      fetch('/api/initial')
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data)
-          setLoading(false)
-        })
-    }, [])
-  
-    if (isLoading) return <p>Loading...</p>
-    if (!data) return <p>No data</p>
+  const { data, error } = useSWR('/api/initial', fetcher)
+
+  if (error) return <div>Failed to load</div>
+  if (!data) return <div>Loading...</div>
 
   
     
