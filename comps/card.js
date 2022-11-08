@@ -323,13 +323,13 @@ const CardGameweek = ({
           <div className="p-10">
             <div className=" text-base mb-5">{date} - {time}</div>
             <div className="grid grid-cols-3">
-              <div className="flex justify-end hover:text-gray-300 ">
+              <div className="flex justify-end hover:text-gray-300 items-center">
                 <Link href={`/team/${hometeam}`}><a>{teamsHome[hometeam]} </a></Link>
               </div>
-              <div className="">
+              <div className="flex justify-center items-center">
                 {hometeamGoals} - {awayteamGoals}
               </div>
-              <div className="flex justify-start hover:text-gray-300">
+              <div className="flex justify-start hover:text-gray-300 items-center">
               <Link href={`/team/${hometeam}`}><a>{teamsAway[awayteam]} </a></Link>
               </div>
             </div>
