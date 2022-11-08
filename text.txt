@@ -2,5 +2,5 @@
 2. profilside skal indeholde persons egen fantasy team
 3. team og player skal laves flottere
 4. Profil skal vælge favorithold.
-5. teamside skal vise et holds tidligere kampe
-6. Eventuelt lave egen tabel. 
+
+5. Kamp info skal flyttes til seperat side

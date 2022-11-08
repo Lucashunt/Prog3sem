@@ -24,9 +24,12 @@ import wolves from "../public/wolves.png";
 import nottforrest from "../public/nottforrest.png";
 
 export default function Card({ gameweek }) {
-  gameweek.sort((a,b) => new Date(a.time).toLocaleDateString([], { month: 'numeric', day: 'numeric' }) - new Date(b.time).toLocaleDateString([], { month: 'numeric', day: 'numeric' }))
+  gameweek.sort(function(a, b) {
+    var c = new Date(a.time);
+    var d = new Date(b.time);
+    return c-d;
+});  
   
-  console.log(gameweek)
   return Array.isArray(gameweek)
     ? gameweek.map((game) => (
         <CardGameweek
