@@ -24,7 +24,7 @@ import wolves from "../public/wolves.png";
 import nottforrest from "../public/nottforrest.png";
 
 export default function Card({ gameweek }) {
-  gameweek.sort((a, b) => new Date(a.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) - new Date(b.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }))
+  gameweek.sort((a,b) => new Date(a.time).toLocaleDateString([], { month: 'numeric', day: 'numeric' }) - new Date(b.time).toLocaleDateString([], { month: 'numeric', day: 'numeric' }))
   
   console.log(gameweek)
   return Array.isArray(gameweek)
@@ -36,6 +36,7 @@ export default function Card({ gameweek }) {
           hometeamGoals={game.hometeamGoals}
           awayteamGoals={game.awayteamGoals}
           time={new Date(game.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          date={new Date(game.time).toLocaleDateString([], { month: 'numeric', day: 'numeric' })}
           gameweek={game.gameweek}
         />
       ))
@@ -50,6 +51,7 @@ const CardGameweek = ({
   awayteamGoals,
   time,
   gameweek,
+  date
 }) => {
   const [goalshome, setGoalshome] = useState(null);
   const [goalsaway, setGoalsaway] = useState(null);
@@ -319,7 +321,7 @@ const CardGameweek = ({
           onClick={() => apiCall({ gameID, gameweek })}
         >
           <div className="p-10">
-            <div className=" text-base mb-5">{time}</div>
+            <div className=" text-base mb-5">{date} - {time}</div>
             <div className="grid grid-cols-3">
               <div className="flex justify-end hover:text-gray-300 ">
                 <Link href={`/team/${hometeam}`}><a>{teamsHome[hometeam]} </a></Link>
@@ -331,11 +333,13 @@ const CardGameweek = ({
               <Link href={`/team/${hometeam}`}><a>{teamsAway[awayteam]} </a></Link>
               </div>
             </div>
+            
           </div>
           <div className="grid grid-cols-2 px-10 pb-5">
             <div className="">{goalshome}</div>
             <div className="">{goalsaway}</div>
           </div>
+          
         </div>
       </button>
     </>
