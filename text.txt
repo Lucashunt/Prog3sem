@@ -1,5 +1,6 @@
-1. Mulighed for at gå gameweek frem og tilbage i gameweek
-2. profilside skal indeholde persons egen fantasy team
-3. Player skal laves flottere
 4. Profil skal vælge favorithold.
 5. Kamp info skal flyttes til seperat side
+
+
+
+team: tilføj players

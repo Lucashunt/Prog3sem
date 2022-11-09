@@ -1,6 +1,8 @@
 import axios from "axios";
 import TeamCard from "../../comps/team";
 
+
+
 export async function getServerSideProps({query}) {
     const teamQuery = query.team
 

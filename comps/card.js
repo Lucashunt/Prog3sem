@@ -333,7 +333,7 @@ const CardGameweek = ({
                 {hometeamGoals} - {awayteamGoals}
               </div>
               <div className="flex justify-start hover:text-gray-300 items-center">
-              <Link href={`/team/${hometeam}`}><a>{teamsAway[awayteam]} </a></Link>
+              <Link href={`/team/${awayteam}`}><a>{teamsAway[awayteam]} </a></Link>
               </div>
             </div>
             
