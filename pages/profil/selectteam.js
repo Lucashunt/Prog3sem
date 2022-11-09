@@ -31,8 +31,9 @@ import {AiOutlineStar} from 'react-icons/ai'
 export default function selectTeam () {
 
 const [star, setStar] = useState(<AiOutlineStar className="w-6 h-6 ml-2"/>)
+
     
-    function favoriteTeam() {
+    function FavoriteTeam() {
       setStar(<AiFillStar className="w-6 h-6 ml-2" />)
     }
 
@@ -50,7 +51,7 @@ const [star, setStar] = useState(<AiOutlineStar className="w-6 h-6 ml-2"/>)
           <div className="flex justify-start items-center">
             <Image src={astonvilla} width={40} height={40} placeholder="blur" />
             <h3 className="ml-3">Aston Villa</h3>{" "}
-            <button onClick={favoriteTeam}>{star}</button>
+            <button onClick={FavoriteTeam}>{star}</button>
           </div>
 
           <div className="flex justify-start items-center">
