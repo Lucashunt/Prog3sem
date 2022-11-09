@@ -21,6 +21,8 @@ import westham from "../../public/westham.png";
 import wolves from "../../public/wolves.png";
 import nottforrest from "../../public/nottforrest.png";
 
+import { useState } from "react";
+
 
 import {AiFillStar} from 'react-icons/ai'
 import {AiOutlineStar} from 'react-icons/ai'
@@ -28,9 +30,11 @@ import {AiOutlineStar} from 'react-icons/ai'
 
 export default function selectTeam () {
 
-
+const [star, setStar] = useState(<AiOutlineStar className="w-6 h-6 ml-2"/>)
     
-    
+    function favoriteTeam() {
+      setStar(<AiFillStar className="w-6 h-6 ml-2" />)
+    }
 
     return (
         <div className="m-20">
@@ -46,7 +50,7 @@ export default function selectTeam () {
           <div className="flex justify-start items-center">
             <Image src={astonvilla} width={40} height={40} placeholder="blur" />
             <h3 className="ml-3">Aston Villa</h3>{" "}
-            <AiFillStar />
+            <button onClick={favoriteTeam}>{star}</button>
           </div>
 
           <div className="flex justify-start items-center">
