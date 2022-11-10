@@ -1,6 +1,6 @@
 import axios from "axios";
 import TeamCard from "../../comps/team";
-
+import PlayersCard from "../../comps/PlayerCard";
 
 
 export async function getServerSideProps({query}) {
@@ -10,6 +10,7 @@ export async function getServerSideProps({query}) {
 
     const response = await axios.get('https://fantasy.premierleague.com/api/bootstrap-static/');
     const data = response.data.teams.find((team) => team.id === parseInt(teamQuery))
+    const dataPlayers = response.data.elements.filter((player) => player.team === parseInt(teamQuery))
 
     
     
@@ -26,12 +27,12 @@ export async function getServerSideProps({query}) {
         }
 
     return {
-        props: {data, matches, teamQuery}, // will be passed to the page component as props
+        props: {data, matches, teamQuery, dataPlayers}, // will be passed to the page component as props
       }  
 }
 
 
-export default function Team({data, matches, teamQuery}) {
+export default function Team({data, matches, teamQuery, dataPlayers}) {
 
 
 
@@ -56,6 +57,7 @@ export default function Team({data, matches, teamQuery}) {
 
           <tbody className="">
             <TeamCard matches={matches} team={teamQuery}/>
+            
           </tbody>
         </table>
       </div>
@@ -84,6 +86,12 @@ export default function Team({data, matches, teamQuery}) {
 
     
         </div>
+        <div className="shadow-2xl rounded-2xl my-20">
+      <h3 className="text-2xl bg-blue-500 text-white rounded-t-2xl py-1 text-center flex justify-center items-center">SPILLERE</h3>
+      <div className="m-20 pb-20">
+        <PlayersCard players={dataPlayers} />
+        </div>
+      </div>
         </div>
     )
 }

@@ -199,7 +199,11 @@ export default function Player(data) {
               <div className="border-b"> {data.data.clean_sheets}</div>
               {playerType[data.data.element_type] === "Defender" ||
               playerType[data.data.element_type] === "Goalkeeper" ? (
-                <div>Goals_conceded {data.data.goals_conceded}</div>
+                <div>Goals conceded</div>
+              ) : null}
+                            {playerType[data.data.element_type] === "Defender" ||
+              playerType[data.data.element_type] === "Goalkeeper" ? (
+                <div className="border-b">{data.data.goals_conceded}</div>
               ) : null}
               <div>Own goals </div>
               <div className="border-b">{data.data.own_goals} </div>
@@ -210,10 +214,16 @@ export default function Player(data) {
               <div>Red cards </div>
               <div className="border-b"> {data.data.red_cards}</div>
               {playerType[data.data.element_type] === "Goalkeeper" ? (
-                <div>Penalties_saved: {data.data.penalties_saved}</div>
+                <div>Penalties saved </div>
+              ) : null}
+                            {playerType[data.data.element_type] === "Goalkeeper" ? (
+                <div className="border-b">{data.data.penalties_saved}</div>
               ) : null}
               {playerType[data.data.element_type] === "Goalkeeper" ? (
-                <div>Saves: {data.data.saves}</div>
+                <div>Saves</div>
+              ) : null}
+                            {playerType[data.data.element_type] === "Goalkeeper" ? (
+                <div className="border-b">{data.data.saves}</div>
               ) : null}
             </div>
           </div>

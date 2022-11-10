@@ -1,6 +1,3 @@
-4. Profil skal vælge favorithold.
 5. Kamp info skal flyttes til seperat side
-
-
-
-team: tilføj players
+8. Lav profilside
+9. Lav loginside
