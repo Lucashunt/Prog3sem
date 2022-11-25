@@ -174,7 +174,11 @@ export default function Player(data) {
   return (
     <div className="mx-20 mb-20">
       <div className=" text-6xl text-center text-orange-500 uppercase font-bold tracking-wider my-20">
-        {data.data.first_name} {data.data.second_name}{" "}
+      <div><Image src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${parseInt(data.data.photo)}.png`} width={94*2} height={120*2}  /></div>
+
+        <div>{data.data.first_name} {data.data.second_name}{" "}</div>
+
+
       </div>
       <div className="grid grid-cols-2  gap-20">
         <div className="shadow-2xl rounded-2xl">
@@ -184,7 +188,7 @@ export default function Player(data) {
           <div className="mx-20 my-10 ">
             <div className="grid grid-cols-2 text-lg gap-5">
               <div className="flex flex-row">Team </div>
-              <div className="border-b">{teams[data.data.team]} </div>
+              <div className="border-b"><Link href={`/team/${data.data.team}`}><a className="hover:text-blue-600">{teams[data.data.team]}</a></Link> </div>
               <div>Position </div>
               <div className="border-b">
                 {playerType[data.data.element_type]}{" "}

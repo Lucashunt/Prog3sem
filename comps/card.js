@@ -38,9 +38,10 @@ export default function Card({ gameweek }) {
           awayteam={game.awayteam}
           hometeamGoals={game.hometeamGoals}
           awayteamGoals={game.awayteamGoals}
-          time={new Date(game.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          time={new Date(game.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
           date={new Date(game.time).toLocaleDateString([], { month: 'numeric', day: 'numeric' })}
           gameweek={game.gameweek}
+          dateLong={new Date(game.time).toLocaleDateString([], { month: 'long', day: 'numeric' })}
         />
       ))
     : null;
@@ -54,20 +55,10 @@ const CardGameweek = ({
   awayteamGoals,
   time,
   gameweek,
-  date
+  date,
+  dateLong
 }) => {
-  const [goalshome, setGoalshome] = useState(null);
-  const [goalsaway, setGoalsaway] = useState(null);
 
-  async function apiCall(gameID) {
-    const res = await fetch(
-      `api/match/?gameID=${gameID.gameID}&gameweek=${gameweek}`
-    );
-    const data = await res.json();
-
-    setGoalshome(<GoalsAway match={data.match} />);
-    setGoalsaway(<GoalsHome match={data.match} />);
-  }
 
 
   const teamsAway = {
@@ -316,93 +307,47 @@ const CardGameweek = ({
     ),
   };
 
+  const options = { month: 'numeric', day: 'numeric'}
+  
+  let today = new Date().toLocaleDateString('de-DE', options)
+
+  
+  date + '.' === today ? date = 'I dag' 
+  : parseInt(date) - 1 === parseInt(today) ? date = 'I morgen'
+  : parseInt(date) + 1 === parseInt(today) ? date = 'I går'
+  : date = dateLong
+
+  const goals = <div className="font-bold">{hometeamGoals} - {awayteamGoals}</div>
   return (
     <>
-      <button>
+      
         <div
           className="bg-blue-500  text-white 2xl:text-2xl  hover:bg-blue-500/80 rounded-md lg:text-lg flex flex-col h-full"
-          onClick={() => apiCall({ gameID, gameweek })}
         >
+          <Link href={`/match/${gameID}?hometeam=${hometeam}&awayteam=${awayteam}&hometeamGoals=${hometeamGoals}&awayteamGoals=${awayteamGoals}&date=${date}&time=${time}&gameweek=${gameweek}&dateLong=${dateLong}`}><a>
           <div className="p-10">
-            <div className=" text-base mb-5">{date} - {time}</div>
+            <div className=" text-base mb-5 text-center font-bold">{date}</div>
             <div className="grid grid-cols-3">
-              <div className="flex justify-end hover:text-gray-300 items-center">
-                <Link href={`/team/${hometeam}`}><a>{teamsHome[hometeam]} </a></Link>
+              <div className="flex justify-end  items-center">
+                {teamsHome[hometeam]}
               </div>
               <div className="flex justify-center items-center">
-                {hometeamGoals} - {awayteamGoals}
+                {hometeamGoals > 0 ? goals : null }
+                {hometeamGoals === 0 ? goals : null }
+                {hometeamGoals === null ? <div className="font-bold">{time}</div> : null }
               </div>
-              <div className="flex justify-start hover:text-gray-300 items-center">
-              <Link href={`/team/${awayteam}`}><a>{teamsAway[awayteam]} </a></Link>
+              <div className="flex justify-start items-center">
+              {teamsAway[awayteam]}
               </div>
             </div>
-            
           </div>
-          <div className="grid grid-cols-2 px-10 pb-5">
-            <div className="">{goalshome}</div>
-            <div className="">{goalsaway}</div>
-          </div>
-          
-        </div>
-      </button>
+           
+            </a></Link>
+           
+          </div>      
+      
+     
     </>
   );
 };
 
-const GoalsHome = ({ match }) => {
-  return Array.isArray(match)
-    ? match.map((goal) => (
-        <GoalsCardHome
-          hometeamPlayer={goal.playerHome}
-          hometeamTimes={goal.timesHome}
-          hometeamPlayerID={goal.playerHomeID}
-          
-        />
-      ))
-    : null;
-};
-
-const GoalsAway = ({ match }) => {
-    console.log(match)
-  return Array.isArray(match)
-    ? match.map((goal) => (
-        <GoalsCardAway
-          awayteamPlayer={goal.playerAway}
-          awayteamPlayerID={goal.playerAwayID}
-          awayteamTimes={goal.timesAway}
-        />
-      ))
-    : null;
-};
-
-const GoalsCardHome = ({ hometeamPlayer, hometeamTimes, hometeamPlayerID }) => {
-  return (
-    <div className="grid grid-cols-4">
-        <div className="flex justify-center items-center">
-              {Array.from({ length: hometeamTimes }, (v, i) => i).map((item) => {
-        return <IoMdFootball className="w-5 h-5" />;
-      })}
-      </div>
-      <div className=" text-base flex justify-start items-center col-span-3 hover:text-gray-300">
-        <Link href={`/player/${hometeamPlayerID}`}><a>{hometeamPlayer}</a></Link>
-        </div>
-
-    </div>
-  );
-};
-
-const GoalsCardAway = ({ awayteamTimes, awayteamPlayer, awayteamPlayerID }) => {
-    
-  return (
-    <div className="grid grid-cols-4">
-      <div className=" text-base flex justify-end items-center col-span-3 hover:text-gray-300">
-        <Link href={`/player/${awayteamPlayerID}`}><a>{awayteamPlayer} </a></Link>
-        </div>
-      <div className="flex justify-center items-center">
-      {Array.from({ length: awayteamTimes }, (v, i) => i).map((item) => {
-        return <IoMdFootball className="w-5 h-5" />;
-      })}
-      </div>
-    </div>
-  );
-};

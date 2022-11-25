@@ -32,13 +32,16 @@ export default function team({ matches, team }) {
     return Array.isArray(matches)
     ? matches.map((match) => (
         <Matches
-            key={match.id}
+            id={match.id}
             teamHome={match.team_h}
             teamAway={match.team_a}
             teamHomeScore={match.team_h_score}
             teamAwayScore={match.team_a_score}
             date={new Date(match.kickoff_time).toLocaleDateString([], { month: 'long', day: 'numeric', year: 'numeric' })}   
             team={parseInt(team)} 
+            time={new Date(match.kickoff_time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+            dateGame={new Date(match.kickoff_time).toLocaleDateString([], { month: 'numeric', day: 'numeric' })}
+            gameweek={match.event}
         />
       ))
     : null;
@@ -46,7 +49,7 @@ export default function team({ matches, team }) {
 }
 
 
-const Matches = ({teamHome, teamAway, teamHomeScore, teamAwayScore, date, team}) => {
+const Matches = ({teamHome, teamAway, teamHomeScore, teamAwayScore, date, team, id, time, dateGame, gameweek}) => {
 
     const teams = {
         1: (
@@ -171,12 +174,15 @@ const Matches = ({teamHome, teamAway, teamHomeScore, teamAwayScore, date, team})
         ),
       };
     return (
+<>
+<Link href={`/match/${id}?hometeam=${teamHome}&awayteam=${teamAway}&hometeamGoals=${teamHomeScore}&awayteamGoals=${teamAwayScore}&date=${dateGame}&time=${time}&gameweek=${gameweek}&dateLong=${date}`}>
+  
 
-
-<tr className="bg-white border-b hover:bg-blue-100/40">
+<tr className="bg-white border-b hover:bg-blue-100/40 cursor-pointer">
+  
 <th className="py-4 px-4">{date}</th>
-<td className="py-4 px-4"><Link href={`/team/${teamHome}`}><a className="hover:text-blue-600">{teams[teamHome]} </a></Link></td>
-<td className="py-4 px-4"><Link href={`/team/${teamAway}`}><a className="hover:text-blue-600">{teams[teamAway]} </a></Link></td>
+<td className="py-4 px-4">{teams[teamHome]} </td>
+<td className="py-4 px-4">{teams[teamAway]}</td>
 
 {teamHome===team && teamHomeScore > teamAwayScore ? <td className="py-4 px-4 text-green-600"><a className="bg-green-600 p-2 rounded-lg text-white ">{teamHomeScore} - {teamAwayScore}</a></td>
 : teamAway===team && teamAwayScore > teamHomeScore ? <td className="py-4 px-4 text-green-600"><a className="bg-green-600 p-2 rounded-lg text-white ">{teamHomeScore} - {teamAwayScore}</a></td>
@@ -185,9 +191,11 @@ const Matches = ({teamHome, teamAway, teamHomeScore, teamAwayScore, date, team})
 : teamHome===team && teamAwayScore > teamHomeScore ? <td className="py-4 px-4 text-red-600"><a className="bg-red-600 p-2 rounded-lg text-white ">{teamHomeScore} - {teamAwayScore}</a></td>
 : null
 }
+
 </tr>
 
-
+</Link>
+</>
     )
 }
 

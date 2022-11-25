@@ -2,6 +2,11 @@ import { Fragment, useContext } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
+import Image from 'next/image';
+import logo from '../public/logo-no-background.png'
+import { useState } from 'react';
+
+
 
 
 
@@ -9,144 +14,60 @@ import Link from 'next/link';
 
 export default function Example() {
 
+  const [active, setActive] = useState('Forside');
 
-  const navigation = [
-    { name: '', href: '', current: false },
-    { name: 'Forside', href: '/', current: false },
-    { name: 'Tabel', href: '/table', current: false },
-    { name: 'Favorithold', href: '/team/18', current: false },
+  let navigation = []
 
-    
+  navigation = [
+    { name: 'Forside', href: '/', current: 'Forside' === active },
+    { name: 'Tabel', href: '/table', current: 'Tabel' === active },
+    { name: 'Favorithold', href: '/team/18', current: 'Favorithold' ===  active }, 
   ]
-  
+
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
-
+  
   
   return (
     
-    <Disclosure as="nav" className="bg-blue-700 sticky top-0 z-10">
-      {({ open }) => (
-        <>
-          <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 text-white rounded-md hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block w-6 h-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block w-6 h-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex items-center justify-center flex-1 sm:items-center sm:justify-start">
-                <div className="flex items-center flex-shrink-0">
-                  <Link href="/">
-                    <a>
-                    <img
-                  className="block w-auto h-10 "
-                  src="/logo-no-background.png"
-                  alt="Your Company"
-                />
-                  </a>
-                  </Link>
-                  <Link href="/">
-                    <a>
-
-                  </a>
-                  </Link>
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4 text-white">
-                    {navigation.map((item) => (
+   <>
+      <div className='pl-10 pt-5 bg-blue-600'><Image src={logo} width={100} height={64}/></div>
+      <div className='pt-5 flex items-center text-white text-xl bg-blue-600 sticky top-0 z-10 font-light'>
+        {navigation.map((item) => (
+          <>
+            <Link href={item.href}>
                       <a
                         key={item.name}
                         href={item.href}
+                        onClick={() => setActive(item.name)}
                         className={classNames(
-                          item.current ? ' text-white hover:bg-blue-400': 'text-white hover:bg-blue-400/20 hover:text-white',
-                          'px-3 py-2 rounded-md text-lg font-extralight '
+                          item.current ? 'border-b-4 ml-10 pb-5 border-orange-400 font-bold -mb-2' : 'pb-5 ml-10 hover:text-white/70',
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
                       </a>
+                      </Link>
+                      </>
                     ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
 
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
-                      <img className="w-8 h-8 rounded-full" src={ 'https://cdn-icons-png.flaticon.com/512/668/668709.png'}/>
-                      </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href={``}
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Din Profil
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Log ud
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
-            </div>
-          </div> 
+      <form className='ml-10 mb-3'>
+      {/* <i className='absolute'> <BiSearch /></i> */}
+        {/* <input type="search" placeholder="Hold & spillere" className=" text-black/80 text-sm ml-10 bg-slate-200 rounded-full indent-3 py-3 pr-20 mb-5"/> */}
+        <div class="relative w-full">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+        </div>
+        <input type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 py-2 rounded-full " placeholder="Hold & spillere" required/>
+    </div>
+      </form>
+      </div>
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
+
+    </> 
   )
   
 }

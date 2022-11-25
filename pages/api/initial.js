@@ -27,15 +27,20 @@ const gameweekDate = [
   
    let today = new Date().toLocaleDateString('de-DE', options).toString().replace(/\./g, ',').split(',').map(Number)
    today.unshift(0)
+
+ 
+
+   
  
   let gameweeksBefore = []
   for(let i = 0; i < gameweekDate.length; i++){
     if (parseInt(gameweekDate[i].slice(3,4)) === parseInt(today.slice(3,4)) && parseInt(gameweekDate[i].slice(2,3)) === parseInt(today.slice(2,3)) && parseInt(gameweekDate[i].slice(1,2)) <= parseInt(today.slice(1,2))){
       gameweeksBefore.push(gameweekDate[i])
+      
     }   
     }
-    
-    const gameweek = parseInt(gameweeksBefore[0].slice(0,1))
+    console.log(gameweeksBefore.length)
+    const gameweek = parseInt(gameweeksBefore[gameweeksBefore.length-1].slice(0,1))
     
     
     const response = await axios.get(`https://fantasy.premierleague.com/api/fixtures/?event=${gameweek}`);

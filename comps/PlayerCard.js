@@ -99,7 +99,7 @@ console.log(image)
                 
          
                         <div className="mr-5">
-            <Image src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${image}.png`} width={47} height={60}  />
+            <Image src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${image}.png`} width={47} height={60} alt="Image" />
             </div>
             <div>{name}</div>
             

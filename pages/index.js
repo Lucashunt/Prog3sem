@@ -63,7 +63,7 @@ async function apiCallBackward (gameweek) {
   
     
      return (
-   <main>
+   <main className=''>
        <div className='mx-20 mb-20'>
         {/* <button className='px-8 py-4 bg-green-400 rounded-2xl text-white font-bold hover:bg-green-400/80' onClick={() => apiCall(1)}><a>GW 1</a></button>
         <button className='px-8 py-4 bg-green-400 rounded-2xl text-white font-bold hover:bg-green-400/80 ml-2' onClick={() => apiCall(2)}><a>GW 2</a></button>

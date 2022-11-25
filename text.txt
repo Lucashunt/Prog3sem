@@ -1,3 +1,13 @@
-5. Kamp info skal flyttes til seperat side
+
+
+
 8. Lav profilside
 9. Lav loginside
+
+11. Søge funktion
+
+
+
+
+
+12. mobilvenlig

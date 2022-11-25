@@ -1,6 +1,29 @@
 import axios from "axios";
 import TeamCard from "../../comps/team";
 import PlayersCard from "../../comps/PlayerCard";
+import Image from "next/image";
+import {
+  arsenal,
+  chelsea,
+  everton,
+  liverpool,
+  astonvilla,
+  bournemouth,
+  brentford,
+  brighton,
+  chrystalpalace,
+  fulham,
+  leeds,
+  leicester,
+  manC,
+  manU,
+  newcastle,
+  southhampton,
+  tottenham,
+  westham,
+  wolves,
+  nottforrest,
+} from "../../public/index.js";
 
 
 export async function getServerSideProps({query}) {
@@ -26,6 +49,8 @@ export async function getServerSideProps({query}) {
 
         }
 
+      
+
     return {
         props: {data, matches, teamQuery, dataPlayers}, // will be passed to the page component as props
       }  
@@ -34,11 +59,115 @@ export async function getServerSideProps({query}) {
 
 export default function Team({data, matches, teamQuery, dataPlayers}) {
 
-
+  const teams = [
+    {
+      name: "Arsenal",
+      image: arsenal,
+      id: 1,
+    },
+    {
+      name: "Aston Villa",
+      image: astonvilla,
+      id: 2,
+    },
+    {
+      name: "Bournemouth",
+      image: bournemouth,
+      id: 3,
+    },
+    {
+      name: "Brentford",
+      image: brentford,
+      id: 4,
+    },
+    {
+      name: "Brighton",
+      image: brighton,
+      id: 5,
+    },
+    {
+      name: "Chelsea",
+      image: chelsea,
+      id: 6,
+    },
+    {
+      name: "Crystal Palace",
+      image: chrystalpalace,
+      id: 7,
+    },
+    {
+      name: "Everton",
+      image: everton,
+      id: 8,
+    },
+    {
+      name: "Fulham",
+      image: fulham,
+      id: 9,
+    },
+    {
+      name: "Leicester",
+      image: leicester,
+      id: 10,
+    },
+    {
+      name: "Leeds",
+      image: leeds,
+      id: 11,
+    },
+    {
+      name: "Liverpool",
+      image: liverpool,
+      id: 12,
+    },
+    {
+      name: "Manchester City",
+      image: manC,
+      id: 13,
+    },
+    {
+      name: "Manchester United",
+      image: manU,
+      id: 14,
+    },
+    {
+      name: "Newcastle",
+      image: newcastle,
+      id: 15,
+    },
+    {
+      name: "Nottingham Forest",
+      image: nottforrest,
+      id: 16,
+    },
+    {
+      name: "Southampton",
+      image: southhampton,
+      id: 17,
+    },
+    {
+      name: "Spurs",
+      image: tottenham,
+      id: 18,
+    },
+    {
+      name: "West Ham",
+      image: westham,
+      id: 19,
+    },
+    {
+      name: "Wolves",
+      image: wolves,
+      id: 20,
+    },
+  ];
 
     return (
         <div className="mx-20 mb-20">
-            <h1 className="text-6xl text-center text-orange-500 uppercase font-bold tracking-wider my-20">{data.name}</h1>
+            <h1 className="text-6xl text-center text-orange-500 uppercase font-bold tracking-wider my-20">
+              <div><Image src={teams[data.id-1].image} width={100} height={100}/></div>
+              <div>{data.name}</div>
+              </h1>
             <div className="grid sm:grid-cols-2 gap-20">
             <div className="">
         <div className="">
