@@ -276,7 +276,7 @@ export default function Match({
                   <div className=" col-span-2 flex justify-end items-center"><Link href={`/player/${player.playerAwayID}`}><a className="hover:text-blue-600">{player.playerAway}</a></Link></div>
                   <div className="flex items-center">
                   {Array.from({ length: player.timesAway }, (v, i) => i).map((item) => {
-        return <IoMdFootball className="w-5 h-5" />;
+        return <IoMdFootball key={item} className="w-5 h-5" />;
       })}
       </div>
                   </div>
