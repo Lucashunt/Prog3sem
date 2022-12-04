@@ -18,15 +18,15 @@ const gameweekDate = [
     [14,29,10,2022],
     [15,5,11,2022],
     [16,12,11,2022],
-    [17,26,12,2022],
+    [17,1,12,2022],
     [18,30,12,2022],
     [19,2,1,2023],
     [20,14,1,2023],
   ]
   const options = { year: 'numeric', month: 'numeric', day: 'numeric'}
   
-   let today = new Date().toLocaleDateString('de-DE', options).toString().replace(/\./g, ',').split(',').map(Number)
-   today.unshift(0)
+    let today = new Date().toLocaleDateString('de-DE', options).toString().replace(/\./g, ',').split(',').map(Number)
+    today.unshift(0)
 
  
 

@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import Layout from '../comps/layout'
 import { AuthProvider } from "../comps/AuthProvider"
+import  { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -10,6 +11,7 @@ function MyApp({ Component, pageProps }) {
   <Component {...pageProps} />
   </Layout>
   </AuthProvider>
+  <Toaster />
   </div>
   )
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import PocketBase from 'pocketbase';
 import {
   arsenal,
   chelsea,
@@ -22,16 +23,59 @@ import {
   wolves,
   nottforrest,
 } from "../../public/index.js";
-
 import { useState, useEffect } from "react";
-
 import { AiFillStar } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
+import { useContext } from "react";
+import AuthContext from "../../lib/AuthContext.js";
 
 export default function SelectTeam() {
   const [favoriteTeam, setFavoriteTeam] = useState("");
+  const pb = new PocketBase('https://pocketbaselucashunt.fly.dev');
+  const { user } = useContext(AuthContext);
+  
+  const teamsID = {
+    Arsenal: 1,
+  
+    "Aston Villa": 2,
+  
+    Bournemouth: 3,
+  
+    Brentford: 4,
+  
+    Brighton: 5,
+  
+    Chelsea: 6,
+  
+    "Crystal Palace": 7,
+  
+    Everton: 8,
+  
+    Fulham: 9,
+  
+    Leicester: 10,
+  
+    Leeds: 11,
+  
+    Liverpool: 12,
+  
+    "Manchester City": 13,
+  
+    "Manchester United": 14,
+  
+    Newcastle: 15,
+  
+    "Nottingham Forest": 16,
+  
+    Southampton: 17,
+  
+    Tottenham: 18,
+  
+    "West Ham": 19,
+  
+    Wolves: 20,
+  };
 
-  // Ville smide denne ind i en anden fil og så importere den ind i denne fil
   const teams = [
     {
       name: "Arsenal",
@@ -135,6 +179,31 @@ export default function SelectTeam() {
     },
   ];
 
+  async function updateFavoriteTeam (team) {
+    setFavoriteTeam(team)
+    let recordSingle = null
+
+    try {
+    recordSingle = await pb.collection('team').getFirstListItem(`userID="${user.model.id}"`, {
+  });
+} catch (error) {
+  console.log(error)
+}
+
+  const data = {
+    "team": teamsID[team],
+    "userID": user.model.id,
+};
+
+    if (recordSingle) {
+      const record = await pb.collection('team').update(recordSingle.id, data);
+} else {
+
+  const record = await pb.collection('team').create(data);
+}
+
+  }
+
   return (
     <div className="mx-20 mb-20">
       <div className=" text-6xl text-center text-orange-500 uppercase font-bold tracking-wider my-20 ">
@@ -162,7 +231,8 @@ export default function SelectTeam() {
                   ) : (
                     <AiOutlineStar
                       className="ml-3 text-yellow-500"
-                      onClick={() => setFavoriteTeam(team.name)}
+                      onClick={() => updateFavoriteTeam(team.name)}
+                      
                     />
                   )}
                 </button>

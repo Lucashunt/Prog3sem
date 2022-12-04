@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
  useEffect(() =>{
     user = JSON.parse(localStorage.getItem("pocketbase_auth"))
     if (user) {
-    setUser(user.token)
+    setUser(user)
     }
  }, []);
  
