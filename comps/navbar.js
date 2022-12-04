@@ -5,13 +5,27 @@ import logo from '../public/logo-no-background.png'
 import { useState } from 'react';
 import { useContext } from "react";
 import AuthContext from "../lib/AuthContext.js";
+import PocketBase from 'pocketbase';
 
 
 export default function Example() {
   const { user } = useContext(AuthContext);
   const [active, setActive] = useState('Forside');
 
+  function logout () {
+    const pb = new PocketBase('https://pocketbaselucashunt.fly.dev');
+    pb.authStore.clear();
+    window.location = "/"
+  }
+
+  function login () {
+    window.location = "/profile"
+  }
+
+
   let navigation = []
+let profile 
+
 
   if (user){
   navigation = [
@@ -19,13 +33,16 @@ export default function Example() {
     { name: 'Tabel', href: '/table', current: 'Tabel' === active },
      { name: 'Favorithold',  href: `/favoriteTeam/${user.model.id}`, current: 'Favorithold' ===  active }, 
   ]
+
+  profile = <button className='font-bold text-red-600  bg-slate-100 rounded-lg px-4 py-2 hover:bg-slate-100/90' onClick={logout}>Log ud</button>;
+
   } else {
     navigation = [
       { name: 'Forside', href: '/', current: 'Forside' === active },
       { name: 'Tabel', href: '/table', current: 'Tabel' === active },
     ]
+    profile = <button className='font-bold text-green-600  bg-slate-100 rounded-lg px-4 py-2 hover:bg-slate-100/90' onClick={login}>Log ind</button>;
   }
-
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
@@ -66,7 +83,7 @@ export default function Example() {
       </form>
       </div>
       <div className='flex items-start justify-end mr-5'>
-        <button className=''><Link href="/profile"><a>Profil</a></Link></button>
+        {profile}
       </div>
       </div>
       
