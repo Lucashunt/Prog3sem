@@ -1,5 +1,6 @@
 import axios from "axios";
 import Table from "../comps/tableComp";
+
 export async function getServerSideProps({}) {
   const response = await axios.get(
     "https://fantasy.premierleague.com/api/fixtures/"

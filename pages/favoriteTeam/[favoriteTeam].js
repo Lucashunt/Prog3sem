@@ -50,7 +50,7 @@ if (teamQueryData) {
 teamQuery = teamQueryData.team
 
 
-    
+
 
     const response = await axios.get('https://fantasy.premierleague.com/api/bootstrap-static/');
     data = response.data.teams.find((team) => team.id === parseInt(teamQuery))
@@ -73,14 +73,10 @@ teamQuery = teamQueryData.team
      
 
     return {
-        props: {data, matches, teamQuery, dataPlayers}, // will be passed to the page component as props
+        props: {data, matches, teamQuery, dataPlayers},
       }  
 }
-
-
-
 export default function Team({data, matches, teamQuery, dataPlayers}) {
-
   const teams = [
     {
       name: "Arsenal",
@@ -183,8 +179,6 @@ export default function Team({data, matches, teamQuery, dataPlayers}) {
       id: 20,
     },
   ];
-
-
   function Getteam ()  {
     return (
 
@@ -254,7 +248,6 @@ export default function Team({data, matches, teamQuery, dataPlayers}) {
     </>
     )
   }
-
   function Noteam () {
     return (
       <>
@@ -267,10 +260,6 @@ export default function Team({data, matches, teamQuery, dataPlayers}) {
       </>
     )
   }
-
-
-
-
 return (
   <>
 {teamQuery != null ?  <Getteam /> : <Noteam />}

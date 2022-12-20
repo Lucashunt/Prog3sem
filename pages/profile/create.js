@@ -24,7 +24,6 @@ export default function NewAccount () {
 
     async function createAcc(e) {
         e.preventDefault();
-
         const data = {
             "username": username.current.value,
             "email": email.current.value,
@@ -33,22 +32,18 @@ export default function NewAccount () {
             "passwordConfirm": password.current.value,
             "name": name.current.value,
         };
-    
         try {
             const record = await pb.collection('users').create(data);
         toast.success('Oprettet bruger!');
-        window.location = "/profile/selectteam"
+        window.location = ('/profile')
         
         } catch (error) {
-            toast.error(error.data.data.email.message);
-            console.log(error.data)
+            toast.error(error.data.data.message);
+            console.log(error.data.data.message)
         }
 
         
 
-        console.log(pb.authStore.isValid);
-        console.log(pb.authStore.token);
-        console.log(pb.authStore.model.id);
 
     }
     

@@ -182,23 +182,19 @@ export default function SelectTeam() {
   async function updateFavoriteTeam (team) {
     setFavoriteTeam(team)
     let recordSingle = null
-
     try {
     recordSingle = await pb.collection('team').getFirstListItem(`userID="${user.model.id}"`, {
   });
 } catch (error) {
   console.log(error)
 }
-
   const data = {
     "team": teamsID[team],
     "userID": user.model.id,
 };
-
     if (recordSingle) {
       const record = await pb.collection('team').update(recordSingle.id, data);
 } else {
-
   const record = await pb.collection('team').create(data);
 }
 
